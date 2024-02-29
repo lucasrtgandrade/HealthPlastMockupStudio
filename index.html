@@ -69,6 +69,7 @@
         display: flex;
         flex-direction: column;
         gap: 1rem;
+        padding: 1rem;
     }
 
     .aside-form__l-header {
@@ -93,7 +94,7 @@
 
     .aside-form__l-options {
         display: flex;
-        margin: 0 auto;
+        justify-content: space-around;
     }
 
     .aside-form__l-radio {
@@ -101,11 +102,18 @@
         flex-direction: row;
         align-items: center;  
         gap: .5rem; 
+        width: 100%;
     }
 
     .aside-form__l-qrcode {
         display: flex;
         flex-direction: column;
+        gap: .5rem;
+    }
+
+    .aside-form__l-cores-gravacao {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
         gap: .5rem;
     }
 
@@ -118,24 +126,54 @@
         font-family: "Montserrat", sans-serif;
         font-size: 1rem;
         font-weight: 700;
-        color: var(--cor-primaria);
-        background-color: var(--cor-primaria-300);
+        color: var(--cor-primaria-500);
+        background-color: white;
         border: 2px solid var(--cor-primaria-500);
         border-radius: .5rem;
         text-transform: uppercase;
         cursor: pointer;
         padding: 1rem 0rem;
-        color: var(--cor-primaria-500);
     }
     
     .button-secondary:hover {
-        background-color: var(--cor-primaria-500);
-        color: var(--cor-suporte-300);
+        background-color: var(--cor-primaria-300);
+        color: var(--cor-primaria-500);
     }
 
     .button-secondary:active {
         background-color: var(--cor-primaria-700);
         border: 2px solid var(--cor-primaria-700);
+        color: white;
+    }
+
+    .aside-form-c-opcao-button {
+        display: flex;
+        gap: .5rem;
+        align-items: center;
+        background-color: white;
+        border: 2px solid var(--cor-primaria-500);
+        border-radius: .5rem;
+        padding: .5rem 1rem;
+        cursor: pointer;
+        font-family: "Montserrat", sans-serif;
+        font-size: .8rem;
+        font-weight: 500;
+        color: var(--cor-primaria-500);
+    }
+
+    .aside-form-c-opcao-button:hover {
+        background-color: var(--cor-primaria-300);
+        color: var(--cor-primaria-500);
+    }
+
+    .aside-form-c-opcao-button:active {
+        background-color: var(--cor-primaria-700);
+        border: 2px solid var(--cor-primaria-700);
+        color: white;
+    }
+
+    .chip {
+        display: none;
     }
 
     /* TYPOGRAPHY */
@@ -226,7 +264,9 @@
     <nav>Navigation</nav>
     <div class="exportar">
         <aside class="info">Info<aside>
-        <main>Main</main>
+        <main>
+            <h2>Shaker 600</h2>
+        </main>
     </div>
     <aside class="form">
         <!-- MEDIDAS -->
@@ -293,8 +333,8 @@
                 <!-- COR ESPECIAL -->
                 <fieldset class="aside-form__l-fieldset">
                     <legend class="aside-form__l-header">
-                        <img class="aside-form__icones" src="aside-form__icones-info.svg">
-                        <h3 class="aside-form__title--h3">Cor Especial</h3>
+                        <img class="aside-form__icones" src="aside-form__icones-pincel.svg">
+                        <h3 class="aside-form__title--h3">Especial</h3>
                     </legend>
                         <div class="aside-form__l-qrcode">
                             <div class="aside-form__l-radio">
@@ -308,6 +348,26 @@
                         </div>
                 </fieldset>
             </div>
+            <fieldset class="aside-form__l-fieldset">
+                <legend class="aside-form__l-header">
+                    <img class="aside-form__icones" src="aside-form__icones-paleta.svg">
+                    <h3 class="aside-form__title--h3">Cor de Gravação</h3>
+                </legend>
+                    <div class="aside-form__l-cores-gravacao">
+                        <button class="aside-form-c-opcao-button">
+                            <span class="chip"><img src="aside-form__icones-check.svg" class="aside-form__icones"></span>
+                            Branco
+                        </button>
+                        <button class="aside-form-c-opcao-button">
+                            <span class="chip"><img src="aside-form__icones-check.svg" class="aside-form__icones"></span>
+                            Preto
+                        </button>
+                        <button class="aside-form-c-opcao-button">
+                            <span class="chip"><img src="aside-form__icones-check.svg" class="aside-form__icones"></span>
+                            Amarelo
+                        </button>
+                    </div>
+            </fieldset>
         </form>
     <aside>
 </body>

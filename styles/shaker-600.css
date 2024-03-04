@@ -213,6 +213,22 @@ select {
     width: inherit;
 }
 
+.main__l-tampa {
+    box-sizing: border-box;
+    position: absolute;
+    z-index: 4;
+    height: inherit;
+    width: inherit;
+}
+
+.main__l-copo {
+    box-sizing: border-box;
+    position: absolute;
+    z-index: 3;
+    height: inherit;
+    width: inherit;
+}
+
 .main__imagem-composicao {
     width: 100%;
     height: auto;

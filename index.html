@@ -12,6 +12,7 @@
     <script src="script/coresDeGravacao.js" defer></script>
     <script src="script/calcularMedidas.js" defer></script>
     <script src="script/corEspecial.js" defer></script>
+    <script src="script/mudarComposicao.js"></script>
     <title>Shaker 600</title>
 </head>
 <body>
@@ -25,21 +26,27 @@
                 <div class="aside-info-l-composicao">
                     <h3 class="aside-info__t-h3-header">Cores:</h3>
                     <div class="aside-info__l-partes">
-                        <label for="escolherSobretampa" class="aside-info__t-h4">Sobretampa:</label>
-                        <select name="sobretampa" id="escolherSobretampa" class="aside-info-c-partes-opcoes">
-                            <option value="amarelo" data-image="">Amarelo</option>
+                        <label for="select-sobretampa" class="aside-info__t-h4">Sobretampa:</label>
+                        <select name="sobretampa" id="select-sobretampa" class="aside-info-c-partes-opcoes" onchange="updateSobretampa()">
+                            <option value="amarelo" data-image="imagens-shaker-600/sobretampa-amarelo.png">Amarelo</option>
+                            <option value="amarelo" data-image="imagens-shaker-600/sobretampa-amarelo-fluor.png">Amarelo Flúor</option>
+                            <option value="amarelo" data-image="imagens-shaker-600/sobretampa-preto.png">Preto</option>
                         </select>
                     </div>
                     <div class="aside-info__l-partes">
-                        <label for="escolherTampa" class="aside-info__t-h4">Tampa:</label>
-                        <select name="tampa" id="escolherTampa" class="aside-info-c-partes-opcoes">
-                            <option value="amarelo" data-image="">Amarelo</option>
+                        <label for="select-tampa" class="aside-info__t-h4">Tampa:</label>
+                        <select name="tampa" id="select-tampa" class="aside-info-c-partes-opcoes" onchange="updateTampa()">
+                            <option value="amarelo" data-image="imagens-shaker-600/tampa-amarelo.png">Amarelo</option>
+                            <option value="amarelo" data-image="imagens-shaker-600/tampa-amarelo-fluor.png">Amarelo Flúor</option>
+                            <option value="amarelo" data-image="imagens-shaker-600/tampa-preto.png">Preto</option>
                         </select>
                     </div>
                     <div class="aside-info__l-partes">
-                        <label for="escolherCopo" class="aside-info__t-h4">Copo:</label>
-                        <select name="copo" id="escolherCopo" class="aside-info-c-partes-opcoes">
-                            <option value="amarelo" data-image="">Amarelo</option>
+                        <label for="select-copo" class="aside-info__t-h4">Copo:</label>
+                        <select name="copo" id="select-copo" class="aside-info-c-partes-opcoes" onchange="updateCopo()">
+                            <option value="amarelo" data-image="imagens-shaker-600/copo-amarelo.png">Amarelo</option>
+                            <option value="amarelo" data-image="imagens-shaker-600/copo-amarelo-fluor.png">Amarelo Flúor</option>
+                            <option value="amarelo" data-image="imagens-shaker-600/copo-fume.png">Fumê</option>
                         </select>
                     </div>
                 </div>
@@ -86,13 +93,13 @@
                 <div class="main__l-gravacao-logo">
                 </div>
                 <div class="main__l-sobretampa">
-                    <img class="main__imagem-composicao" src="imagens-shaker-600/ref-shaker.png">
+                    <img class ="sobretampa" id="selected-sobretampa" src="imagens-shaker-600/sobretampa-preto.png">
                 </div>
                 <div class="main__l-tampa">
-                    <img>
+                    <img class ="tampa" id="selected-tampa" src="imagens-shaker-600/tampa-preto.png">
                 </div>
                 <div class="main__l-copo">
-                    <img>
+                    <img class ="copo" id="selected-copo" src="imagens-shaker-600/copo-fume.png">
                 </div>
             <!-- Medidas -->
             <div class="main__l-medidas-frente-container">

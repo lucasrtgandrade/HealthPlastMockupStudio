@@ -5,370 +5,299 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://use.typekit.net/ooc6cbp.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/shaker-600.css">
+    <script src="/script/ativacao-qrCode.js" defer></script>
+    <script src="/script/coresDeGravacao.js" defer></script>
+    <script src="/script/calcularMedidas.js" defer></script>
+    <script src="/script/corEspecial.js" defer></script>
     <title>Shaker 600</title>
 </head>
-<style>
-    :root {
-        --cor-primaria-300: #DEE6F8;
-        --cor-primaria-500: #234EA1;
-        --cor-primaria-700: #1A3875;
-
-
-        --cor-suporte-300: #FFFFFF;
-    }
-    html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-    }
-
-    body {
-        display: grid;
-        grid-template-rows: auto 1fr;
-        grid-template-columns: 3.6fr 1fr;
-        height: 100vh;
-    }
-
-    nav {
-        grid-column: 1 / -1; /* Span from first to last */
-        background: #007bff;
-        color: white;
-        padding: 1rem;
-        text-align: center;
-        box-sizing: border-box;
-        height: 48px;
-    }
-
-    .form {
-        background: #f8f9fa;
-        grid-row: 2;
-        grid-column: 2;
-    }
-
-    .main {
-        background: #4c7094;
-    }
-
-    .info {
-        background: #f8f9fa;
-    }
-
-    .exportar {
-        grid-row: 2;   
-        grid-column: 1;
-        display: grid;
-        grid-template-columns: 1fr 4fr;
-    }
-
-    /* FORM */
-
-    /* LAYOUT */
-
-    .aside-form__l-form {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1rem;
-    }
-
-    .aside-form__l-header {
-        display: flex;
-        gap: 8px;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .aside-form__l-header-input {
-        display: flex;
-        gap: 8px;
-    }
-
-    .aside-form__l-fieldset {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        border: 2px solid var(--cor-primaria-500);
-        border-radius: .5rem;
-    }
-
-    .aside-form__l-options {
-        display: flex;
-        justify-content: space-around;
-    }
-
-    .aside-form__l-radio {
-        display: flex;
-        flex-direction: row;
-        align-items: center;  
-        gap: .5rem; 
-        width: 100%;
-    }
-
-    .aside-form__l-qrcode {
-        display: flex;
-        flex-direction: column;
-        gap: .5rem;
-    }
-
-    .aside-form__l-cores-gravacao {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: .5rem;
-    }
-
-    /* COMPONENTS */
-    .aside-form__icones {
-        height: 1rem;
-    }
-
-    .button-secondary {
-        font-family: "Montserrat", sans-serif;
-        font-size: 1rem;
-        font-weight: 700;
-        color: var(--cor-primaria-500);
-        background-color: white;
-        border: 2px solid var(--cor-primaria-500);
-        border-radius: .5rem;
-        text-transform: uppercase;
-        cursor: pointer;
-        padding: 1rem 0rem;
-    }
-    
-    .button-secondary:hover {
-        background-color: var(--cor-primaria-300);
-        color: var(--cor-primaria-500);
-    }
-
-    .button-secondary:active {
-        background-color: var(--cor-primaria-700);
-        border: 2px solid var(--cor-primaria-700);
-        color: white;
-    }
-
-    .aside-form-c-opcao-button {
-        display: flex;
-        gap: .5rem;
-        align-items: center;
-        background-color: white;
-        border: 2px solid var(--cor-primaria-500);
-        border-radius: .5rem;
-        padding: .5rem 1rem;
-        cursor: pointer;
-        font-family: "Montserrat", sans-serif;
-        font-size: .8rem;
-        font-weight: 500;
-        color: var(--cor-primaria-500);
-    }
-
-    .aside-form-c-opcao-button:hover {
-        background-color: var(--cor-primaria-300);
-        color: var(--cor-primaria-500);
-    }
-
-    .aside-form-c-opcao-button:active {
-        background-color: var(--cor-primaria-700);
-        border: 2px solid var(--cor-primaria-700);
-        color: white;
-    }
-
-    .chip {
-        display: none;
-    }
-
-    /* TYPOGRAPHY */
-    .aside-form__title--h3 {
-        font-family: "Montserrat", sans-serif;
-        font-size: 1rem;
-        font-weight: 700;
-        color: var(--cor-primaria-500);
-        line-height: 150%;
-        margin: 0;
-    }
-
-    .aside-form__title--h4 {
-        font-family: "Montserrat", sans-serif;
-        font-size: .8rem;
-        font-weight: 600;
-        color: var(--cor-primaria-500);
-        line-height: 150%;
-        margin: 0;
-    }
-
-    input[type="number"] {
-        font-family: "Montserrat", sans-serif;
-        font-size: .8rem;
-        font-weight: 500;
-        color: var(--cor-primaria-500);
-        padding: .4rem .5rem;
-        border: 1px solid var(--cor-primaria-500);
-        border-radius: 4px;
-        display: block;
-        width: 94%;
-    }
-
-    input[type="radio"] {
-        border: 2px solid var(--cor-primaria-500);
-        color: var(--cor-primaria-500);
-        margin: 0;
-    }
-
-    .aside-form__text--p {
-        font-family: "Montserrat", sans-serif;
-        font-size: .8rem;
-        font-weight: 500;
-        color: var(--cor-primaria-500);
-    }
-
-    @media (max-width: 900px) {
-        body {
-            display: grid;
-            grid-template-rows: auto 1fr; /* Nav then content */
-            grid-template-columns: 3fr 1fr; /* Form, Exportar */
-            background-color: red;
-        }
-
-        nav {
-            grid-column: 1 / -1; /* Span from first to last */
-            background: #007bff;
-            color: white;
-            padding: 1rem;
-            text-align: center;
-            box-sizing: border-box;
-            height: 48px;
-        }
-        
-        .form {
-            background: #f8f9fa;
-            grid-row: 3;
-            grid-column: 1 / -1; /* Span from first to last */
-        }
-
-        .main {
-            background: #4c7094;
-        }
-
-        .info {
-            background: #f8f9fa;
-        }
-
-        .exportar {
-            border: 1px solid yellow;
-            width: 100vw;
-            height: 100vh;
-        }
-    }
-
-</style>
 <body>
     <nav>Navigation</nav>
     <div class="exportar">
-        <aside class="info">Info<aside>
+        <aside class="info">
+            <div class="info-container">
+                <img class="aside-info__c-main-logo" src="healthPlastLogo.png" alt="Logo da Health Plast">
+                <h2 class="aside-info__t-h2-header">Projeção Para Aprovação</h2>
+                <!-- SELEÇÃO DA COMPOSIÇÃO DO COPO -->
+                <div class="aside-info-l-composicao">
+                    <h3 class="aside-info__t-h3-header">Cores:</h3>
+                    <div class="aside-info__l-partes">
+                        <label for="escolherSobretampa" class="aside-info__t-h4">Sobretampa:</label>
+                        <select name="sobretampa" id="escolherSobretampa" class="aside-info-c-partes-opcoes">
+                            <option value="amarelo" data-image="">Amarelo</option>
+                        </select>
+                    </div>
+                    <div class="aside-info__l-partes">
+                        <label for="escolherTampa" class="aside-info__t-h4">Tampa:</label>
+                        <select name="tampa" id="escolherTampa" class="aside-info-c-partes-opcoes">
+                            <option value="amarelo" data-image="">Amarelo</option>
+                        </select>
+                    </div>
+                    <div class="aside-info__l-partes">
+                        <label for="escolherCopo" class="aside-info__t-h4">Copo:</label>
+                        <select name="copo" id="escolherCopo" class="aside-info-c-partes-opcoes">
+                            <option value="amarelo" data-image="">Amarelo</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="aside-info-l-aviso">
+                    <h3 class="aside-info__t-h3-header">Aprovação do Pedido:</h3>
+                    <p class="aside-info__text--p">▶ O pedido será enviado para produção somente após a aprovação da Projeção. Após encaminhado o pedido o mesmo não poderá ser alterado.<br>
+                        ▶ A aprovação da arte final é de responsabilidade do solicitante, favor conferir todas as informações para evitar qualquer transtorno futuro. </p>
+                </div>
+                <div class="aside-info-l-contato">
+                    <div class="aside-info-l-icones">
+                        <img class="aside-info__icones" src="/icones/aside-info__icones-whatsapp.svg">
+                        <p class="aside-info__text--p-i">(11) 5678-7640</p>
+                    </div>
+                    <div class="aside-info-l-icones">
+                        <img class="aside-info__icones" src="/icones/aside-info__icones-email.svg">
+                        <p class="aside-info__text--p-i">contato@healthplast.com.br</p>
+                    </div>
+                    <div class="aside-info-l-icones">
+                        <img class="aside-info__icones" src="/icones/aside-info__icones-site.svg">
+                        <p class="aside-info__text--p-b">www.healthplast.com.br</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
         <main>
-            <h2>Shaker 600</h2>
+            <div class="main__l-header-info">
+                <div class="main__l-header">
+                    <h2 class="main__t-h2-header">Shaker 600</h2>
+                    <span class="main__c-qrcode-ativo">
+                        <p class="main__t-p-qrcode">
+                            <span class="main__t-p-qrcode-bold">O QR Code impresso é de responsabilidade do cliente. </span><br>
+                             A leitura dependerá das cores escolhidas, tamanho, validade e da qualidade da impressão.
+                        </p>
+                    </span>
+                </div>
+                <div class="main__l-aviso">
+                    <div id="selectedColorDisplay" class="selecionarCores">
+                        <p class="selecionarCores">Cores de gravação: Selecionar </p>
+                    </div>
+                    <div class="display-message" data-display="set1"></div>
+                </div>
+            </div>
+            <div class="main__l-mockup">
+                <div class="main__l-gravacao-logo">
+                </div>
+                <div class="main__l-sobretampa">
+                    <img class="main__imagem-composicao" src="/imagens-shaker-600/ref-shaker.png">
+                </div>
+                <div class="main__l-tampa">
+                    <img>
+                </div>
+                <div class="main__l-copo">
+                    <img>
+                </div>
+            <!-- Medidas -->
+            <div class="main__l-medidas-frente-container">
+                <p class="main__t-p-frente">Distância entre<br>arte e borda:<br>
+                    <span id="acimaFrente"></span>
+                </p>
+                <p class="main__t-p-frente">Altura da arte:<br>
+                    <span id="meioFrente"></span>
+                </p>
+                <p class="main__t-p-frente">Distância entre<br>arte e borda:<br>
+                    <span id="abaixoFrente"></span>
+                </p>
+                <p class="main__t-p-frente">Largura da Arte:<br>
+                    <span id="frenteLargura"></span>
+                </p>
+            </div>
+            <div class="main__l-medidas-verso-container">
+                <p class="main__t-p-verso">Distância entre<br>arte e borda:<br>
+                    <span id="acimaVerso"></span>
+                </p>
+                <p class="main__t-p-verso">Altura da arte:<br>
+                    <span id="meioVerso"></span>
+                </p>
+                <p class="main__t-p-verso">Distância entre<br>arte e borda:<br>
+                    <span id="abaixoVerso"></span>
+                </p>
+                <p class="main__t-p-verso">Largura da Arte:<br>
+                    <span id="versoLargura"></span>
+                </p>
+            </div>
+            </div>
+            <h3 class="main__t-h3-header">Frente / Verso</h3>
         </main>
     </div>
     <aside class="form">
-        <!-- MEDIDAS -->
-        <form class="aside-form__l-form">
-            <fieldset class="aside-form__l-fieldset">
-                <legend class="aside-form__l-header">
-                    <img class="aside-form__icones" src="aside-form__icones-medidas.svg">
-                    <h3 class="aside-form__title--h3">Frente</h3>
-                </legend>
-                <label>
-                    <div class="aside-form__l-header-input">
-                        <img class="aside-form__icones" src="aside-form__icones-altura.svg">
-                        <h4 class="aside-form__title--h4">Altura</h4>
+        <div class="aside-form-l">
+            <label>
+                <h2 class="aside-form__t-h2-header">Informações da Arte</h2>
+            </label>
+            <div class="aside-form__l-form">
+                <div class="aside-form__medidas-container">
+                    <div class="aside-form__medidas">
+                        <fieldset class="aside-form__l-fieldset">
+                            <legend class="aside-form__l-header">
+                                <img class="aside-form__icones" src="/icones/aside-form__icones-medidas.svg">
+                                <h3 class="aside-form__title--h3">Frente</h3>
+                            </legend>
+                            <label class="aside-form-medidas-container" for="alturaFrente">
+                                <div class="aside-form__l-header-input">
+                                    <img class="aside-form__icones" src="/icones/aside-form__icones-altura.svg">
+                                    <h4 class="aside-form__title--h4">Altura</h4>
+                                </div>
+                                <input type="number" max="100" min="0" required id="alturaFrente">
+                            </label>
+                            <label class="aside-form-medidas-container" for="larguraFrente">
+                                <div class="aside-form__l-header-input">
+                                    <img class="aside-form__icones" src="/icones/aside-form__icones-largura.svg">
+                                    <h4 class="aside-form__title--h4">Largura</h4>
+                                </div>
+                                <input type="number" max="85" min="0" required id="larguraFrente">
+                            </label>
+                        </fieldset>
+                        <fieldset class="aside-form__l-fieldset">
+                            <legend class="aside-form__l-header">
+                                <img class="aside-form__icones" src="/icones/aside-form__icones-medidas.svg">
+                                <h3 class="aside-form__title--h3">Verso</h3>
+                            </legend>
+                            <label label class="aside-form-medidas-container" for="alturaVerso">
+                                <div class="aside-form__l-header-input">
+                                    <img class="aside-form__icones" src="/icones/aside-form__icones-altura.svg">
+                                    <h4 class="aside-form__title--h4">Altura</h4>
+                                </div>
+                                <input type="number" max="100" min="0" required id="alturaVerso">
+                            </label>
+                            <label label class="aside-form-medidas-container" for="larguraVerso">
+                                <div class="aside-form__l-header-input">
+                                    <img class="aside-form__icones" src="/icones/aside-form__icones-largura.svg">
+                                    <h4 class="aside-form__title--h4">Largura</h4>
+                                </div>
+                                <input type="number" max="85" min="0" required id="larguraVerso">
+                            </label>
+                        </fieldset>
                     </div>
-                    <input type="number" max="100" min="0" required>
-                </label>
-                <label>
-                    <div class="aside-form__l-header-input">
-                        <img class="aside-form__icones" src="aside-form__icones-largura.svg">
-                        <h4 class="aside-form__title--h4">Largura</h4>
-                    </div>
-                    <input type="number" max="85" min="0" required>
-                </label>
-            </fieldset>
-            <fieldset class="aside-form__l-fieldset">
-                <legend class="aside-form__l-header">
-                    <img class="aside-form__icones" src="aside-form__icones-medidas.svg">
-                    <h3 class="aside-form__title--h3">Verso</h3>
-                </legend>
-                <label>
-                    <div class="aside-form__l-header-input">
-                        <img class="aside-form__icones" src="aside-form__icones-altura.svg">
-                        <h4 class="aside-form__title--h4">Altura</h4>
-                    </div>
-                    <input type="number" max="100" min="0" required>
-                </label>
-                <label>
-                    <div class="aside-form__l-header-input">
-                        <img class="aside-form__icones" src="aside-form__icones-largura.svg">
-                        <h4 class="aside-form__title--h4">Largura</h4>
-                    </div>
-                    <input type="number" max="85" min="0" required>
-                </label>
-            </fieldset>
-            <button class="button-secondary">Calcular</button>
-            <div class="aside-form__l-options">
-                <!-- QRCODE -->
-                <fieldset class="aside-form__l-fieldset">
-                    <legend class="aside-form__l-header">
-                        <img class="aside-form__icones" src="aside-form__icones-qrcode.svg">
-                        <h3 class="aside-form__title--h3">QrCode</h3>
-                    </legend>
-                        <div class="aside-form__l-qrcode">
-                            <div class="aside-form__l-radio">
-                                <input type="radio" value="sim">
-                                <label class="aside-form__text--p">Sim</label>
+                    <button class="button-secondary button-secondary-l" onclick="calcular()">Calcular</button>
+                    <div class="aside-form__l-options">
+                        <fieldset class="aside-form__l-fieldset">
+                            <legend class="aside-form__l-header">
+                                <img class="aside-form__icones" src="/icones/aside-form__icones-info.svg">
+                                <h3 class="aside-form__title--h3">QrCode</h3>
+                            </legend>
+                                <div class="aside-form__l-qrcode">
+                                    <div class="aside-form__l-radio">
+                                        <input type="radio" name="opcaoQrcode" value="sim">
+                                        <label class="aside-form__text--p">Sim</label>
+                                    </div>
+                                    <div class="aside-form__l-radio">
+                                        <input type="radio" name="opcaoQrcode" value="nao" checked>
+                                        <label class="aside-form__text--p" >Não</label>
+                                    </div>
+                                </div>
+                        </fieldset>
+                        <fieldset class="aside-form__l-fieldset" data-group="set1">
+                            <legend class="aside-form__l-header">
+                                <img class="aside-form__icones" src="/icones/aside-form__icones-pincel.svg">
+                                <h3 class="aside-form__title--h3">Especial</h3>
+                            </legend>
+                            <div class="aside-form__l-qrcode">
+                                <div class="aside-form__l-radio">
+                                    <input type="radio" name="optionSet1" value="sim">
+                                    <label class="aside-form__text--p">Sim</label>
+                                </div>
+                                <div class="aside-form__l-radio">
+                                    <input type="radio" name="optionSet1" value="nao" checked>
+                                    <label class="aside-form__text--p">Não</label>
+                                </div>
                             </div>
-                            <div class="aside-form__l-radio">
-                                <input type="radio" value="nao" checked>
-                                <label class="aside-form__text--p" >Não</label>
+                        </fieldset>
+                    </div>
+                </div>
+                <fieldset class="aside-form__l-fieldset-cores">
+                    <legend class="aside-form__l-header">
+                        <img class="aside-form__icones" src="/icones/aside-form__icones-paleta.svg">
+                        <h3 class="aside-form__title--h3">Cor de Gravação</h3>
+                    </legend>
+                        <div class="aside-form__l-cores-gravacao">
+                            <div class="aside-form-c-opcao-button" role="button" aria-pressed="false">
+                                <span class="chip"><img src="/icones/aside-form__icones-check.svg" class="aside-form__icones-check"></span>
+                                Branco
+                            </div>
+                            <div class="aside-form-c-opcao-button" role="button" aria-pressed="false">
+                                <span class="chip"><img src="/icones/aside-form__icones-check.svg" class="aside-form__icones-check"></span>
+                                Preto
+                            </div>
+                            <div class="aside-form-c-opcao-button" role="button" aria-pressed="false">
+                                <span class="chip"><img src="/icones/aside-form__icones-check.svg" class="aside-form__icones-check"></span>
+                                Amarelo
+                            </div>
+                            <div class="aside-form-c-opcao-button" role="button" aria-pressed="false">
+                                <span class="chip"><img src="/icones/aside-form__icones-check.svg" class="aside-form__icones-check"></span>
+                                Amarelo Flúor
+                            </div>
+                            <div class="aside-form-c-opcao-button" role="button" aria-pressed="false">
+                                <span class="chip"><img src="/icones/aside-form__icones-check.svg" class="aside-form__icones-check"></span>
+                                Azul Claro
+                            </div>
+                            <div class="aside-form-c-opcao-button" role="button" aria-pressed="false">
+                                <span class="chip"><img src="/icones/aside-form__icones-check.svg" class="aside-form__icones-check"></span>
+                                Azul
+                            </div>
+                            <div class="aside-form-c-opcao-button" role="button" aria-pressed="false">
+                                <span class="chip"><img src="/icones/aside-form__icones-check.svg" class="aside-form__icones-check"></span>
+                                Azul Escuro
+                            </div>
+                            <div class="aside-form-c-opcao-button" role="button" aria-pressed="false">
+                                <span class="chip"><img src="/icones/aside-form__icones-check.svg" class="aside-form__icones-check"></span>
+                                Cinza
+                            </div>
+                            <div class="aside-form-c-opcao-button" role="button" aria-pressed="false">
+                                <span class="chip"><img src="/icones/aside-form__icones-check.svg" class="aside-form__icones-check"></span>
+                                Gold
+                            </div>
+                            <div class="aside-form-c-opcao-button" role="button" aria-pressed="false">
+                                <span class="chip"><img src="/icones/aside-form__icones-check.svg" class="aside-form__icones-check"></span>
+                                Laranja
+                            </div>
+                            <div class="aside-form-c-opcao-button" role="button" aria-pressed="false">
+                                <span class="chip"><img src="/icones/aside-form__icones-check.svg" class="aside-form__icones-check"></span>
+                                Laranja Flúor
+                            </div>
+                            <div class="aside-form-c-opcao-button" role="button" aria-pressed="false">
+                                <span class="chip"><img src="/icones/aside-form__icones-check.svg" class="aside-form__icones-check"></span>
+                                Marrom
+                            </div>
+                            <div class="aside-form-c-opcao-button" role="button" aria-pressed="false">
+                                <span class="chip"><img src="/icones/aside-form__icones-check.svg" class="aside-form__icones-check"></span>
+                                Pink
+                            </div>
+                            <div class="aside-form-c-opcao-button" role="button" aria-pressed="false">
+                                <span class="chip"><img src="/icones/aside-form__icones-check.svg" class="aside-form__icones-check"></span>
+                                Prata
+                            </div>
+                            <div class="aside-form-c-opcao-button" role="button" aria-pressed="false">
+                                <span class="chip"><img src="/icones/aside-form__icones-check.svg" class="aside-form__icones-check"></span>
+                                Rosa
+                            </div>
+                            <div class="aside-form-c-opcao-button" role="button" aria-pressed="false">
+                                <span class="chip"><img src="/icones/aside-form__icones-check.svg" class="aside-form__icones-check"></span>
+                                Roxo
+                            </div>
+                            <div class="aside-form-c-opcao-button" role="button" aria-pressed="false">
+                                <span class="chip"><img src="/icones/aside-form__icones-check.svg" class="aside-form__icones-check"></span>
+                                Tiffany
+                            </div>
+                            <div class="aside-form-c-opcao-button" role="button" aria-pressed="false">
+                                <span class="chip"><img src="/icones/aside-form__icones-check.svg" class="aside-form__icones-check"></span>
+                                Verde Escuro
+                            </div>
+                            <div class="aside-form-c-opcao-button" role="button" aria-pressed="false">
+                                <span class="chip"><img src="/icones/aside-form__icones-check.svg" class="aside-form__icones-check"></span>
+                                Verde Flúor
                             </div>
                         </div>
                 </fieldset>
-                <!-- COR ESPECIAL -->
-                <fieldset class="aside-form__l-fieldset">
-                    <legend class="aside-form__l-header">
-                        <img class="aside-form__icones" src="aside-form__icones-pincel.svg">
-                        <h3 class="aside-form__title--h3">Especial</h3>
-                    </legend>
-                        <div class="aside-form__l-qrcode">
-                            <div class="aside-form__l-radio">
-                                <input type="radio" value="sim">
-                                <label class="aside-form__text--p">Sim</label>
-                            </div>
-                            <div class="aside-form__l-radio">
-                                <input type="radio" value="nao" checked>
-                                <label class="aside-form__text--p" >Não</label>
-                            </div>
-                        </div>
-                </fieldset>
-            </div>
-            <fieldset class="aside-form__l-fieldset">
-                <legend class="aside-form__l-header">
-                    <img class="aside-form__icones" src="aside-form__icones-paleta.svg">
-                    <h3 class="aside-form__title--h3">Cor de Gravação</h3>
-                </legend>
-                    <div class="aside-form__l-cores-gravacao">
-                        <button class="aside-form-c-opcao-button">
-                            <span class="chip"><img src="aside-form__icones-check.svg" class="aside-form__icones"></span>
-                            Branco
-                        </button>
-                        <button class="aside-form-c-opcao-button">
-                            <span class="chip"><img src="aside-form__icones-check.svg" class="aside-form__icones"></span>
-                            Preto
-                        </button>
-                        <button class="aside-form-c-opcao-button">
-                            <span class="chip"><img src="aside-form__icones-check.svg" class="aside-form__icones"></span>
-                            Amarelo
-                        </button>
-                    </div>
-            </fieldset>
-        </form>
+        </div>
+    </div>
     <aside>
 </body>
 </html>

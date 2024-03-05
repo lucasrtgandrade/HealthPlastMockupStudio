@@ -12,12 +12,15 @@
     <script src="script/coresDeGravacao.js" defer></script>
     <script src="script/calcularMedidas.js" defer></script>
     <script src="script/corEspecial.js" defer></script>
-    <script src="script/mudarComposicao.js"></script>
+    <script src="script/mudarComposicao.js" defer></script>
+    <script src="script/loadLogoFile.js" defer></script>
+    <script src="https://unpkg.com/html2canvas@1.0.0-rc.7/dist/html2canvas.min.js"></script>
+    <script src="script/exportarMockup.js" defer></script>
     <title>Shaker 600</title>
 </head>
 <body>
     <nav>Navigation</nav>
-    <div class="exportar">
+    <div id="export-image" class="exportar-imagem">
         <aside class="info">
             <div class="info-container">
                 <img class="aside-info__c-main-logo" src="healthPlastLogo.png" alt="Logo da Health Plast">
@@ -91,9 +94,11 @@
             </div>
             <div class="main__l-mockup">
                 <div class="main__l-gravacao-logo">
+                    <div id="pngContainer">
+                    </div>
                 </div>
                 <div class="main__l-sobretampa">
-                    <img class ="sobretampa" id="selected-sobretampa" src="imagens-shaker-600/sobretampa-preto.png">
+                    <img class ="sobretampa" id="selected-sobretampa" src="imagens-shaker-600/ref-shaker.png">
                 </div>
                 <div class="main__l-tampa">
                     <img class ="tampa" id="selected-tampa" src="imagens-shaker-600/tampa-preto.png">
@@ -102,34 +107,35 @@
                     <img class ="copo" id="selected-copo" src="imagens-shaker-600/copo-fume.png">
                 </div>
             <!-- Medidas -->
-            <div class="main__l-medidas-frente-container">
-                <p class="main__t-p-frente">Distância entre<br>arte e borda:<br>
-                    <span id="acimaFrente"></span>
-                </p>
-                <p class="main__t-p-frente">Altura da arte:<br>
-                    <span id="meioFrente"></span>
-                </p>
-                <p class="main__t-p-frente">Distância entre<br>arte e borda:<br>
-                    <span id="abaixoFrente"></span>
-                </p>
-                <p class="main__t-p-frente">Largura da Arte:<br>
-                    <span id="frenteLargura"></span>
-                </p>
-            </div>
-            <div class="main__l-medidas-verso-container">
-                <p class="main__t-p-verso">Distância entre<br>arte e borda:<br>
-                    <span id="acimaVerso"></span>
-                </p>
-                <p class="main__t-p-verso">Altura da arte:<br>
-                    <span id="meioVerso"></span>
-                </p>
-                <p class="main__t-p-verso">Distância entre<br>arte e borda:<br>
-                    <span id="abaixoVerso"></span>
-                </p>
-                <p class="main__t-p-verso">Largura da Arte:<br>
-                    <span id="versoLargura"></span>
-                </p>
-            </div>
+                <div class="main__l-medidas-frente-container">
+                    <p class="main__t-p-frente">Distância entre<br>arte e borda:<br>
+                        <span id="acimaFrente"></span>
+                    </p>
+                    <p class="main__t-p-frente">Altura da arte:<br>
+                        <span id="meioFrente"></span>
+                    </p>
+                    <p class="main__t-p-frente">Distância entre<br>arte e borda:<br>
+                        <span id="abaixoFrente"></span>
+                    </p>
+                    <p class="main__t-p-frente">Largura da Arte:<br>
+                        <span id="frenteLargura"></span>
+                    </p>
+                </div>
+                <div class="main__l-medidas-verso-container">
+                    <p class="main__t-p-verso">Distância entre<br>arte e borda:<br>
+                        <span id="acimaVerso"></span>
+                    </p>
+                    <p class="main__t-p-verso">Altura da arte:<br>
+                        <span id="meioVerso"></span>
+                    </p>
+                    <p class="main__t-p-verso">Distância entre<br>arte e borda:<br>
+                        <span id="abaixoVerso"></span>
+                    </p>
+                    <p class="main__t-p-verso">Largura da Arte:<br>
+                        <span id="versoLargura"></span>
+                    </p>
+                </div>
+            <button class="main-primary-button" id="download-btn">Baixar</button>
             </div>
             <h3 class="main__t-h3-header">Frente / Verso</h3>
         </main>
@@ -185,7 +191,7 @@
                     </div>
                     <button class="button-secondary button-secondary-l" onclick="calcular()">Calcular</button>
                     <div class="aside-form__l-options">
-                        <fieldset class="aside-form__l-fieldset">
+                        <fieldset class="aside-form__l-fieldset-options">
                             <legend class="aside-form__l-header">
                                 <img class="aside-form__icones" src="icones/aside-form__icones-info.svg">
                                 <h3 class="aside-form__title--h3">QrCode</h3>
@@ -201,7 +207,7 @@
                                     </div>
                                 </div>
                         </fieldset>
-                        <fieldset class="aside-form__l-fieldset" data-group="set1">
+                        <fieldset class="aside-form__l-fieldset-options" data-group="set1">
                             <legend class="aside-form__l-header">
                                 <img class="aside-form__icones" src="icones/aside-form__icones-pincel.svg">
                                 <h3 class="aside-form__title--h3">Especial</h3>
@@ -216,6 +222,17 @@
                                     <label class="aside-form__text--p">Não</label>
                                 </div>
                             </div>
+                        </fieldset>
+                        <fieldset class="aside-form__l-fieldset-options">
+                            <legend class="aside-form__l-header">
+                                <img class="aside-form__icones" src="icones/aside-form__icones-pintura.svg">
+                                <h3 class="aside-form__title--h3">Arte</h3>
+                            </legend>
+                                <input type="file" id="pngInput" accept="image/png" style="display: none;">
+                                <label for="pngInput" class="button-secondary-logo">
+                                    <h3 class="aside-form__t-logo-btn">Enviar Logo:
+                                        <span id="fileName"></span></h3>
+                                    </label>
                         </fieldset>
                     </div>
                 </div>
@@ -306,5 +323,55 @@
         </div>
     </div>
     <aside>
+        <script>
+// Ensure the DOM is fully loaded before attaching the event listener
+document.addEventListener('DOMContentLoaded', () => {
+    const downloadBtn = document.getElementById('download-btn');
+    
+    // Remove any existing click listeners to avoid duplicating downloads
+    downloadBtn.removeEventListener('click', captureAndDownloadImage);
+    downloadBtn.addEventListener('click', captureAndDownloadImage);
+});
+
+async function captureAndDownloadImage() {
+    try {
+        const exportElement = document.querySelector("#export-image");
+        
+        // Ensure the element is fully visible in the viewport
+        exportElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        const canvas = await html2canvas(exportElement, getHtml2CanvasOptions());
+        const imageURL = canvas.toDataURL("image/png");
+        downloadImage(imageURL, "exported-image.png");
+    } catch (error) {
+        console.error("Error capturing or downloading image:", error);
+        alert("An error occurred while capturing the image.");
+    }
+}
+
+function getHtml2CanvasOptions() {
+    return {
+        scale: 2,
+        useCORS: true,
+        windowHeight: document.querySelector("#export-image").scrollHeight,
+        windowWidth: document.querySelector("#export-image").scrollWidth,
+    };
+}
+
+function downloadImage(url, filename) {
+    const downloadLink = document.createElement('a');
+    downloadLink.href = url;
+    downloadLink.download = filename;
+    
+    // This prevents downloading the file twice
+    if (document.body.contains(downloadLink)) {
+        document.body.removeChild(downloadLink);
+    }
+
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+}
+        </script>
 </body>
 </html>
